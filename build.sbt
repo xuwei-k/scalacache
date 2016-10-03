@@ -22,9 +22,9 @@ lazy val core = Project(id = "scalacache-core", base = file("core"))
     }
   )
   .settings(
-    libraryDependencies += "org.scalacheck" %% "scalacheck" % "1.13.2" % Test,
-    scala211OnlyDeps(
-      "org.squeryl" %% "squeryl" % "0.9.5-7" % Test,
+    libraryDependencies ++= Seq(
+      "org.scalacheck" %% "scalacheck" % "1.13.2" % Test,
+      "org.squeryl" %% "squeryl" % "0.9.7" % Test,
       "com.h2database" % "h2" % "1.4.182" % Test
     )
   )
@@ -193,12 +193,3 @@ lazy val updateVersionInReadme = ReleaseStep(action = st => {
 
   st
 })
-
-def scala211OnlyDeps(moduleIDs: ModuleID*) = 
-  libraryDependencies ++= (scalaBinaryVersion.value match {
-    case "2.11" => moduleIDs
-    case other => Nil
-  })
-
-
-
